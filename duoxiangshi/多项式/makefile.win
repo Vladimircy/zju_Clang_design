@@ -1,0 +1,43 @@
+# Project: 多项式
+# Makefile created by Red Panda C++ 1.4
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = 多项式_private.res
+OBJ      = main.o frame.o list.o io.o $(RES)
+LINKOBJ  = main.o frame.o list.o io.o $(RES)
+CLEANOBJ  =  main.o frame.o list.o io.o 多项式_private.res 多项式.exe
+LIBS     = 
+INCS     =  
+CXXINCS  =  
+BIN      = 多项式.exe
+CXXFLAGS = $(CXXINCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
+CFLAGS   = $(INCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c frame.h io.h list.h
+	$(CC) -c C:/Users/28032/Desktop/duoxiangshi/多项式/main.c -o main.o $(CFLAGS) 
+
+frame.o: frame.c frame.h io.h list.h
+	$(CC) -c C:/Users/28032/Desktop/duoxiangshi/多项式/frame.c -o frame.o $(CFLAGS) 
+
+list.o: list.c io.h list.h
+	$(CC) -c C:/Users/28032/Desktop/duoxiangshi/多项式/list.c -o list.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=utf-8
+
+io.o: io.c frame.h io.h list.h
+	$(CC) -c C:/Users/28032/Desktop/duoxiangshi/多项式/io.c -o io.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=utf-8
+
+多项式_private.res: 多项式_private.rc 
+	$(WINDRES) -i 多项式_private.rc --input-format=rc -o 多项式_private.res -O coff 
+

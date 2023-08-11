@@ -1,0 +1,40 @@
+# Project: maze
+# Makefile created by Red Panda C++ 1.4
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = maze_private.res
+OBJ      = main.o io.o solve.o $(RES)
+LINKOBJ  = main.o io.o solve.o $(RES)
+CLEANOBJ  =  main.o io.o solve.o maze_private.res maze.exe
+LIBS     = 
+INCS     =  
+CXXINCS  =  
+BIN      = maze.exe
+CXXFLAGS = $(CXXINCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
+CFLAGS   = $(INCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
+RM       = del /q /f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(CLEANOBJ) > NUL 2>&1
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+main.o: main.c io.h solve.h
+	$(CC) -c C:/Users/28032/Desktop/maze/maze/main.c -o main.o $(CFLAGS) 
+
+io.o: io.c
+	$(CC) -c C:/Users/28032/Desktop/maze/maze/io.c -o io.o $(CFLAGS)  -finput-charset=UTF-8 -fexec-charset=utf-8
+
+solve.o: solve.c io.h
+	$(CC) -c C:/Users/28032/Desktop/maze/maze/solve.c -o solve.o $(CFLAGS) 
+
+maze_private.res: maze_private.rc 
+	$(WINDRES) -i maze_private.rc --input-format=rc -o maze_private.res -O coff 
+
